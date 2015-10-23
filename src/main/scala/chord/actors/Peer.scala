@@ -1,28 +1,45 @@
 package chord.actors
 
 import akka.actor.Actor
-import chord.common.Messages
+import chord.common._
+import chrod.Main
 
 /**
  * @author user
  */
-class Peer extends Actor{
-  
+class Peer (val identity: Int) extends Actor {
+  var fingerTable: Array[FingerTableEntry] = new Array[FingerTableEntry](Utils.m)
+  var successor: Int = 0
+
+
   def receive = {
-    
-    case "Hello" =>
+
+    case Messages.Join(networkCount: Int) => {
+      //Initialize its own finger table entries.
+      for (i <- 0 to Utils.m - 1) {
+        fingerTable(i).start = identity + 2 ^ i
+        fingerTable(i).stop = identity + 2 ^ (i + 1)
+      }      
+      if (networkCount == 0) {
+        for (i <- 0 to Utils.m - 1) {
+          fingerTable(i).successor = identity
+        }
+      }
+      else {
+        for (i <- 0 to Utils.m - 1) {
+         // fingerTable(i).successor = Main.findSuccessor(fingerTable(i).start)
+        }
+      }
+      //Update all other finger tables
+      //Move all the appropritae keys to the new node
       
-    case Messages.join(ipAddr : String) =>{
-      //finds appropriate  node  and forward the message to it 
-      //and add to it's finger table, move any files if required 
     }
-    
-    case Messages.lookup(file : String) => {
-      
+
+    case Messages.Lookup(file : String) => {
+
     }
-    
-    //maintain finger tables and files in some datastructure
-      
+
+
   }
-  
+
 }

@@ -7,9 +7,9 @@ import scala.util.Random
  * @author user
  */
 object Utils {
+
   
   val m = 8; // size of the ring is 2^8 = 256
-
   /**
    * hash(input) calculates the hash of the given input string. Take m bits from sha hash
    * of the string and take m bits from it

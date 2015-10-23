@@ -4,7 +4,7 @@ package chord.common
  * @author user
  */
 object Messages {
-  
-  case class join(ipAddr : String)
-  case class lookup(file : String)
+
+  case class Join(networkCount: Int)
+  case class Lookup(file: String)
 }
