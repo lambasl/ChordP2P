@@ -3,17 +3,8 @@ package chord.common
 import java.security.MessageDigest
 import scala.util.Random
 
-/**
- * @author user
- */
 object Utils {
-
-  
-  val m = 8; // size of the ring is 2^8 = 256
-  /**
-   * hash(input) calculates the hash of the given input string. Take m bits from sha hash
-   * of the string and take m bits from it
-   */
+  val m = 8
   def consistentHash(input: String): Int = {
     val sha = MessageDigest.getInstance("SHA-256")
     var hash = sha.digest(input.getBytes)
@@ -30,25 +21,23 @@ object Utils {
     return finalVal.toInt
 
   }
-  
-  def getM(): Int={
+
+  def getM(): Int = {
     return m;
   }
-  
-  def generateIpAddreses(n: Int): Array[String] ={
+
+  def generateIpAddreses(n: Int): Array[String] = {
     var addresses = new Array[String](n)
     var rand = new Random;
-     for(i <- 0 to n - 1){
-        var pos1 = rand.nextInt(255) + 1;
-        var pos2 = rand.nextInt(256);
-        var pos3 = rand.nextInt(256);
-        var pos4 = rand.nextInt(256);
-        var ip = pos1 + "." + pos2 + "." + pos3 + "." + pos4
-        addresses(i) = ip
-     }
-    
+    for (i <- 0 to n - 1) {
+      var pos1 = rand.nextInt(255) + 1;
+      var pos2 = rand.nextInt(256);
+      var pos3 = rand.nextInt(256);
+      var pos4 = rand.nextInt(256);
+      var ip = pos1 + "." + pos2 + "." + pos3 + "." + pos4
+      addresses(i) = ip
+    }
+
     return addresses
   }
-  
-  
 }

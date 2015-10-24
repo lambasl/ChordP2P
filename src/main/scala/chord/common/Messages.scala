@@ -1,10 +1,8 @@
 package chord.common
 
-/**
- * @author user
- */
 object Messages {
-
-  case class Join(networkCount: Int)
-  case class Lookup(file: String)
+  case class Join(identity: Int)
+  case object Lookup
+  case class FindSuccessor(node: Int, ftNumber: Int)
+  case class FindPredecessor(node: Int, ftNumber: Int)
 }
